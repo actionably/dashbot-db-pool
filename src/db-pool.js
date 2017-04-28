@@ -1,5 +1,6 @@
 'use strict'
 
+require('babel-polyfill')
 const q = require('q')
 const mysql = require('mysql')
 const md5 = require('js-md5')
