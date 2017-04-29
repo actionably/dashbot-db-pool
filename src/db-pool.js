@@ -69,7 +69,7 @@ class PoolWrapper {
       return
     }
     let defaultDbUrl = process.env.MYSQL_URL
-    if (defaultDbUrl !== null) {
+    if (!defaultDbUrl) {
       throw new Error(`Missing environment variable 'MYSQL_URL'`)
     }
 
