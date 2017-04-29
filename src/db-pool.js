@@ -62,6 +62,7 @@ class ConnectionWrapper {
  */
 class PoolWrapper {
   constructor() {
+    this.cache = new NodeCache({stdTTL: 30, checkperiod: 120})
   }
 
   connect() {
@@ -89,8 +90,15 @@ class PoolWrapper {
     this.rawPool = mysql.createPool(defaultDbUrl)
     this.queryWithPromise = q.nbind(this.rawPool.query, this.rawPool)
     this.getConnectionWithPromise = q.nbind(this.rawPool.getConnection, this.rawPool)
-    this.cache = new NodeCache({stdTTL: 30, checkperiod: 120})
-    console.log('connecting to ' + defaultDbUrl)
+    console.log('connecting to mysql ' + defaultDbUrl)
+  }
+
+  disconnect() {
+    if (!this.rawPool) {
+      return
+    }
+    this.rawPool.destroy()
+    this.rawPool = null
   }
 
   async getConnection() {
@@ -104,10 +112,10 @@ class PoolWrapper {
   }
 
   async query(sql, args, opts) {
-    this.connect()
     if (opts && opts.useCache) {
       return this.queryCache(sql, args, opts.ttl)
     }
+    this.connect()
     if (process.env.MYSQL_PRINT_SQL === 'true') {
       console.log(mysql.format(sql, args))
     }
