@@ -19,12 +19,14 @@
   },
   "homepage": "https://github.com/actionably/dashbot-db-pool#readme",
   "dependencies": {
-    "babel-polyfill": "6.23.0",
     "js-md5": "0.4.2",
     "mysql": "2.13.0",
     "node-cache": "4.1.1",
     "q": "1.5.0"
   },
+	"peerDependencies": {
+		"babel-polyfill": "6.x"
+	},
   "devDependencies": {
     "babel-cli": "6.10.1",
     "babel-core": "6.10.4",
