@@ -1,6 +1,6 @@
 {
   "name": "dashbot-db-pool",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "thin wrapper around mysql npm to make it promise friendly, add caching and more user friendly return values.",
   "main": "lib/db-pool",
   "scripts": {
