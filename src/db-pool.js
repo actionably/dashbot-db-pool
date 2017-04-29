@@ -89,15 +89,16 @@ class PoolWrapper {
 
     this.rawPool = mysql.createPool(defaultDbUrl)
     this.queryWithPromise = q.nbind(this.rawPool.query, this.rawPool)
+    this.endWithPromise = q.nbind(this.rawPool.end, this.end)
     this.getConnectionWithPromise = q.nbind(this.rawPool.getConnection, this.rawPool)
     console.log('connecting to mysql ' + defaultDbUrl)
   }
 
-  disconnect() {
+  async end() {
     if (!this.rawPool) {
       return
     }
-    this.rawPool.destroy()
+    await this.endWithPromise()
     this.rawPool = null
   }
 
