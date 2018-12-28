@@ -74,17 +74,13 @@ class PoolWrapper {
       throw new Error(`Missing environment variable 'MYSQL_URL'`)
     }
 
-    if (defaultDbUrl.indexOf('multipleStatements=true') === -1) {
+    if (defaultDbUrl.indexOf('charset=utf8mb4') === -1) {
       if (defaultDbUrl.indexOf('?') === -1) {
         defaultDbUrl += '?'
       } else {
         defaultDbUrl += '&'
       }
-      defaultDbUrl += 'multipleStatements=true'
-    }
-
-    if (defaultDbUrl.indexOf('charset=utf8mb4') === -1) {
-      defaultDbUrl += '&charset=utf8mb4'
+      defaultDbUrl += 'charset=utf8mb4'
     }
 
     this.rawPool = mysql.createPool(defaultDbUrl)
