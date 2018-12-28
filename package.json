@@ -2,10 +2,8 @@
   "name": "dashbot-db-pool",
   "version": "1.0.10",
   "description": "thin wrapper around mysql npm to make it promise friendly, add caching and more user friendly return values.",
-  "main": "lib/db-pool",
+  "main": "src/db-pool",
   "scripts": {
-    "compile": "babel -d lib/ src/ --retain-lines",
-    "prepublish": "npm run compile",
     "test": "eslint src"
   },
   "repository": {
